@@ -1,0 +1,13 @@
+---
+- name: "Upgrade PAN-OS version to {{ target_version }}"
+  hosts: '{{ firewall | lower() }}'
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Get System and HA facts
+      paloaltonetworks.panos.panos_facts:
+        provider: '{{ device  }}'
+        gather_subset:
+          - system
+          - ha
